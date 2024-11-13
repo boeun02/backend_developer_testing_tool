@@ -21,10 +21,7 @@ public class PortCheckController {
     @GetMapping("/checkPort")
     public String checkPort(@RequestParam String ip, @RequestParam int port) {
         try {
-            boolean isPortOpen = portCheckService.isPortOpen(ip, port);
-            return isPortOpen ? "포트가 열려 있습니다." : "포트가 닫혀 있습니다.";
-        } catch (IllegalArgumentException e) {
-            return "존재하지 않는 IP/포트 번호입니다.";
+            return portCheckService.checkPortStatus(ip, port);
         } catch (Exception e) {
             return "포트를 확인할 수 없습니다.";
         }
