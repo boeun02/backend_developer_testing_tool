@@ -1,0 +1,57 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.port_api'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	// Spring Boot Web 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Lombok 의존성 (코드 간결화를 위해)
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Spring Boot DevTools (개발 시 핫스왑 및 빠른 개발 환경 제공)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// 테스트 의존성
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// JSON 처리 (요청/응답에 사용)
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+	// PDF 저장을 위한 iText 라이브러리
+	implementation 'com.itextpdf:itext7-core:7.2.3'
+
+	// Swagger 의존성 (API 문서화용)
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+	// H2 Database (테스트 환경에서 사용)
+	implementation 'com.h2database:h2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
